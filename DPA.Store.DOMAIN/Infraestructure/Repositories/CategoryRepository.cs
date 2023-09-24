@@ -20,16 +20,25 @@ namespace DPA.Store.DOMAIN.Infraestructure.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task Delete(int id)
+        {
+            Category category  = _dbContext.Category.Where(x => x.Id == id).FirstOrDefault();
+            _dbContext.Category.Remove(category);
+        }
+
         public async Task<IEnumerable<Category>> GetAll() {
             return await _dbContext.Category.ToListAsync();
         }
 
-        public async Task<Category> Get(int idCategory) {
-            return await _dbContext.Category.FindAsync(idCategory);
+        public async Task<Category> GetById(int id)
+        { 
+            return _dbContext.Category.Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public async Task<bool> Put(Category category) {
-            return true;
+        public async Task<Category> Insert(Category category)
+        {
+            await _dbContext.Category.AddAsync(category);
+            return category;
         }
     }
 }

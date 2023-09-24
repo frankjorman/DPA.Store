@@ -10,6 +10,9 @@ namespace DPA.Store.DOMAIN.Core.Interfaces
     public interface ICategoryRepository
     {
         public Task<IEnumerable<Category>> GetAll();
+        public Task Delete(int id);
+        public Task<Category> GetById(int id);
+        public Task<Category> Insert(Category category);
 
     }
 }
